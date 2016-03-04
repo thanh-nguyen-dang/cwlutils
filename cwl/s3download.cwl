@@ -18,7 +18,7 @@ requirements:
   - class: InlineJavascriptRequirement
 
 class: CommandLineTool
-
+id: "download"
 inputs:
   - id: "#ids"
     type:
@@ -37,6 +37,7 @@ inputs:
     type: string
     inputBinding:
       prefix: --s3-url
+    default: null
 
   - id: "#signpost-url"
     type: ["null", "string"]
@@ -69,8 +70,8 @@ outputs:
         engine: node-engine.cwl
         script: |
           {
-          if (inputs["keys"]) { return "output/*/*";}
-          else {return "output/*"}
+          if (inputs["keys"]) { return inputs["keys"]}
+          else {return inputs["ids"]}
           }
 
-baseCommand: ["s3util", "download", "--path", "output"]
+baseCommand: ["s3util", "download", "--path", "."]

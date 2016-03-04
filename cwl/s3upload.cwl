@@ -41,6 +41,7 @@ inputs:
     type: string
     inputBinding:
       prefix: --s3-url
+    default: null
 
   - id: "#processes"
     type: int
