@@ -52,6 +52,12 @@ inputs:
     inputBinding:
       prefix: --keys
 
+  - id: "#path"
+    type: string
+    inputBinding:
+      prefix: --path
+    default: "output"
+
   - id: "#processes"
     type: int
     inputBinding:
@@ -70,8 +76,8 @@ outputs:
         engine: node-engine.cwl
         script: |
           {
-          if (inputs["keys"]) { return inputs["keys"]}
-          else {return inputs["ids"]}
+          if (inputs["keys"]) { return "output/*/*";}
+          else {return "output/*"}
           }
 
-baseCommand: ["s3util", "download", "--path", "."]
+baseCommand: ["s3util", "download"]
